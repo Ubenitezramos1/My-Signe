@@ -1,6 +1,335 @@
-body{
-    background:#111;
-    color:white;
-    font-family:Arial;
+/* Reset some default browser spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Center everything on the page */
+body {
+    background: linear-gradient(
+        135deg,
+        #FFFDF8,
+        #F8F2FA
+    );
+
+    color: #47434A;
+
+    font-family: "Noto Sans Georgian", serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+
+/* Login box */
+#login-container {
+
+    width: 400px;
+
+    background: #FFFFFF;
+
+    padding: 40px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,.35);
+
+    transition: opacity .8s ease;
+
+    animation: fadeIn 1.2s ease;
+
+
+}
+
+.heart {
+
+    font-size: 35px;
+
+    color: #D8A7B1;
+
+
+}
+/* Main title */
+h1 {
+
+    color: #5f5a63;
+
+    margin-bottom: 15px;
+
+    font-family: "Quicksand", sans-serif;
+
+    font-size: 3rem;
+
+    font-weight: 500;
+
+}
+
+/* Small text */
+p {
+
+    margin-bottom: 20px;
+
+    color: #7A7482;
+
+    line-height: 1.7;
+
+}
+
+/* Password field */
+input {
+
+    width: 100%;
+
+    padding: 14px;
+
+    background: #FCFCFD;
+
+    border: 2px solid #E8E4EE;
+
+    border-radius: 14px;
+
+    border-color: #CDBCEB;
+
+    font-size: 16px;
+
+    margin-bottom: 20px;
+
+}
+
+/* Button */
+button {
+
+    width: 100%;
+
+    margin-bottom: 15px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #C8B6E2;
+
+    color: white;
+
+    font-family: "Quicksand", sans-serif;
+    
+    font-weight: 600;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: .3s ease;
+
+}
+
+/* Button hover effect */
+button:hover {
+
+    background: #BFA7D9;
+
+    transform: scale(1.02); 
+    transform: translateY(-2px);
+
+}
+
+#message{
+
+    color: rgb(226, 91, 91);
+
+}
+
+#website-content{
+    display: none;
+
+    opacity: 0;
+
+    transform: translateY(10px);
+
+    transition: opacity .9s ease, transform .9s ease;
+
+}
+
+#website-content.visible{
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.visible {
+    opacity: 1;
+}
+
+#letter-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+.letter-card {
+
+    background: #FFFFFF;
+
+    width: 600px;
+
+    padding: 60px;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.08);
+
+    text-align: center;
+
+}
+
+#letter-text {
+
+    font-family: Georgia, serif;
+
+    font-size: 1.1rem;
+
+    line-height: 2;
+
+    color: #6E6876;
+
+    text-align: left;
+
+    margin-top: 30px;
+
+    min-height: 200px;
+
+    margin-bottom: 30px;
+
+}
+
+#puzzle-page {
+
+    display: none;
+
+    min-height: 100vh;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+.puzzle-card {
+
+    background: white;
+
+    width: 650px;
+
+    padding: 50px;
+
+    border-radius: 25px;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.08);
+
     text-align:center;
+
+}
+
+#puzzle-container {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 150px);
+
+    grid-template-rows: repeat(3, 150px);
+
+    gap: 5px;
+
+    justify-content: center;
+
+    margin: 30px auto;
+
+}
+
+
+.piece {
+
+    width: 150px;
+
+    height: 150px;
+
+    background-image: url("images/us.jpg");
+
+    background-size: 450px 450px;
+
+    cursor: pointer;
+
+    border-radius: 12px;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+
+/* Selected piece */
+
+.piece.selected {
+
+    transform:
+        scale(1.08)
+        translateY(-10px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.2);
+
+    z-index: 2;
+
+}
+
+#continue-button {
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: .3s ease opacity 2s ease;
+
+}
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
 }
