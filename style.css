@@ -439,20 +439,9 @@ button:hover {
     box-shadow:
         0 10px 20px rgba(0,0,0,.08);
 
-    transform:translateY(30px);
-
     transition:
-        opacity .8s ease,
-        transform .8s ease,
+        transform .25s ease,
         box-shadow .25s ease;
-
-}
-
-.song.show {
-
-    opacity:1;
-
-    transform:translateY(0);
 
 }
 

@@ -36,7 +36,7 @@ const songs = [
     {
         title: "Car Crash",
 
-        artist: "Jigitz, Charlotte Plank",
+        artist:"Jigitz, Charlotte Plank",
 
         embed:
             "https://open.spotify.com/embed/album/1lP8AhonyWZZKNgnEcjSV0?utm_source=generator&si=0dc0c25a6be84159",
@@ -49,7 +49,7 @@ const songs = [
     {
         title: "Eres",
 
-        artist: "Café Tacvba",
+        artist:"Café Tacvba",
 
         embed:
             "https://open.spotify.com/embed/track/6kdCN6gTWLcLxmLXoUcwuI?utm_source=generator&si=cbcbd82b04eb4e1c",
@@ -62,7 +62,7 @@ const songs = [
     {
         title: "Planet",
 
-        artist: "The Neighborhood",
+        artist:"The Neighborhood",
 
         embed: "https://open.spotify.com/embed/track/3UFePyU0mSJvGONoLWKTeW?utm_source=generator&si=c0af7a8d1f20402c",
 
@@ -464,12 +464,7 @@ function createSongs() {
 
         songContainer.appendChild(songCard);
 
-
-        setTimeout(() => {
-
-            songCard.classList.add("show");
-
-        }, 200);
+        
 
 
     });
