@@ -6,6 +6,7 @@ const websiteContent = document.getElementById("website-content");
 const letterPage = document.getElementById("letter-page");
 const puzzlePage = document.getElementById("puzzle-page");
 const puzzleMessage = document.getElementById("puzzle-message");
+const musicPage = document.getElementById("music-page");
 
 const correctPassword = "Fig";
 
@@ -22,6 +23,42 @@ Every adventure, every laugh, every moment
 we share is something I treasure.
 
 I love you ❤️`;
+
+const songs = [
+
+    {
+        title: "Car Crash by Jigitz, Charlotte Plank",
+
+        embed:
+        "https://open.spotify.com/embed/album/1lP8AhonyWZZKNgnEcjSV0?utm_source=generator&si=0dc0c25a6be84159",
+
+        note:
+        "This one just screams you. If this song was a person. It would be you"
+    },
+
+
+    {
+        title: "Eres by Café Tacvba",
+
+        embed:
+        "https://open.spotify.com/embed/track/6kdCN6gTWLcLxmLXoUcwuI?utm_source=generator&si=cbcbd82b04eb4e1c",
+
+        note:
+        "This song we both really liked in Oaxaca. It was the day we got our infinity bracelets. It means so much to me."
+    },
+
+
+    {
+        title: "Planet by The Neighborhood",
+
+        embed:
+        "https://open.spotify.com/embed/album/1xsGQbqvVDIq3sCJDUzQZv?utm_source=generator&si=4fcd6028385f48e8",
+
+        note:
+        "I remember I had played this song and you really liked it. Not just the song, but I hope we can continue showing each other our interests."
+    }
+
+];
 
 
 loginButton.addEventListener("click", checkPassword);
@@ -57,6 +94,9 @@ function checkPassword() {
             setTimeout(() => {
 
                 typeLetter();
+
+                //Create songs from now
+                createSongs();
 
             }, 500);            
 
@@ -118,7 +158,7 @@ document
 
         letterPage.style.display = "none";
 
-        puzzlePage.style.display = "block";
+        puzzlePage.style.display = "flex";
 
         setTimeout(() => {
 
@@ -127,11 +167,6 @@ document
             createPuzzle();
 
         }, 60); 
-        
-         
-            setTimeout(() => {
-                puzzlePage.classList.add("visible");
-            }, 60);
 
     }, 900);
 
@@ -330,6 +365,76 @@ function checkSolved(){
         }, 60);
     
     }
+
+}
+
+document
+.getElementById("puzzle-button")
+.addEventListener("click", function(){
+
+    puzzlePage.classList.add("hidden");
+
+    setTimeout(() => {
+
+        puzzlePage.style.display = "none";
+
+        musicPage.style.display = "flex";
+
+        setTimeout(() => {
+
+            musicPage.classList.add("visible");
+
+        }, 60); 
+        
+
+    }, 900);
+
+});
+
+function createSongs(){
+
+    const songContainer =
+    document.getElementById("songs");
+
+
+    songs.forEach(song => {
+
+
+        const songCard =
+        document.createElement("div");
+
+
+        songCard.classList.add("song");
+
+
+        songCard.innerHTML = `
+
+            <h2 id="song-title">
+                ${song.title}
+            </h2>
+
+
+            <iframe
+                src="${song.embed}"
+                width="100%"
+                height="152"
+                frameborder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy">
+            </iframe>
+
+
+            <p id="song-message">
+                ${song.note}
+            </p>
+
+        `;
+
+
+        songContainer.appendChild(songCard);
+
+
+    });
 
 }
 

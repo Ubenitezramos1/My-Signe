@@ -351,6 +351,81 @@ button:hover {
 
 }
 
+/* Music Page */
+
+#music-page{
+
+    display:none;
+
+    opacity:0;
+
+    min-height:100vh;
+
+    margin-top: 10vh;
+
+    text-align: center;
+
+
+    justify-content:center;
+
+    align-items:center;
+
+    transition:opacity .9s ease;
+
+}
+
+#music-page.visible{
+
+    display:flex;
+
+    opacity:1;
+
+}
+
+.song{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin:20px 0;
+
+    box-shadow:
+        0 10px 20px rgba(0,0,0,.08);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+.song:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.14);
+
+}
+
+#song-message{
+    color: #5f5a63;
+    font-size: medium;
+
+    text-align: center;
+
+    margin-top: 12px;
+
+    margin-bottom: 0px;
+}
+
+#song-title{
+    text-align: left;
+
+}
+
 @keyframes fadeIn {
 
     from {
