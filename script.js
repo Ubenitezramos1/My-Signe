@@ -10,52 +10,64 @@ const musicPage = document.getElementById("music-page");
 
 const correctPassword = "Fig";
 
-const letterText = `
-My dearest Signe,
+const letterText = /*`
+I've been trying to figure out how to put everything I feel into words, and I realized something. My favorite part of us isn't one specific memory. It's who we're becoming together.
 
-I wanted to make something special for you.
+When I think back to when we first met, I remember how drawn I was to you. There was something different about you that I couldn't explain. Then came our late-night conversations, sitting at the park and the pier, learning about each other little by little. Somewhere along the way, admiration turned into something much deeper. I didn't just fall for you—I started feeling at home with you.
 
-Even though we are far apart right now,
-I wanted you to have something that reminds
-you how much you mean to me.
+One of my favorite things about you is that you let me see who you really are. Your curiosity, your kindness, your sense of adventure, your willingness to be vulnerable, and even the parts of yourself that you're still learning to understand. I don't want a perfect version of you. I just want you. Every chapter of you.
 
-Every adventure, every laugh, every moment
-we share is something I treasure.
+You've taught me a lot without even realizing it. You've challenged me to communicate better, to trust more, and to choose understanding over assumptions. Because of you, I've learned that love isn't about never struggling—it's about continuing to choose each other while we grow through those struggles.
 
-I love you ❤️`;
+I know we both have histories that shaped us into who we are today. I don't see that as something to hide from. If anything, I'm grateful for every path that eventually led us to each other. I genuinely believe I'm a better man because of the lessons I've learned, and I'm grateful I get to bring that version of myself into this relationship with you.
+
+I don't know what every chapter of our future will look like, but I do know this: I want to keep learning you. I want to keep understanding you. I want to keep cheering for your growth while continuing to grow myself. I want us to always feel like we can talk about anything, laugh about the little things, work through the hard things, and never stop choosing one another.
+
+Thank you for making me feel grounded. Thank you for trusting me with your heart. Thank you for showing me that love can feel peaceful instead of confusing.
+
+No matter how many miles are between us right now, I've never been more certain that you're exactly where I want my heart to be.
+
+I love you.
+
+`*/ 'hello';
 
 const songs = [
 
     {
-        title: "Car Crash by Jigitz, Charlotte Plank",
+        title: "Car Crash",
+
+        artist: "Jigitz, Charlotte Plank",
 
         embed:
-        "https://open.spotify.com/embed/album/1lP8AhonyWZZKNgnEcjSV0?utm_source=generator&si=0dc0c25a6be84159",
+            "https://open.spotify.com/embed/album/1lP8AhonyWZZKNgnEcjSV0?utm_source=generator&si=0dc0c25a6be84159",
 
         note:
-        "This one just screams you. If this song was a person. It would be you"
+            "This one just screams you. If this song was a person. It would be you"
     },
 
 
     {
-        title: "Eres by Café Tacvba",
+        title: "Eres",
+
+        artist: "Café Tacvba",
 
         embed:
-        "https://open.spotify.com/embed/track/6kdCN6gTWLcLxmLXoUcwuI?utm_source=generator&si=cbcbd82b04eb4e1c",
+            "https://open.spotify.com/embed/track/6kdCN6gTWLcLxmLXoUcwuI?utm_source=generator&si=cbcbd82b04eb4e1c",
 
         note:
-        "This song we both really liked in Oaxaca. It was the day we got our infinity bracelets. It means so much to me."
+            "This song we both really liked in Oaxaca. It was the day we got our infinity bracelets. It means so much to me."
     },
 
 
     {
-        title: "Planet by The Neighborhood",
+        title: "Planet",
 
-        embed:
-        "https://open.spotify.com/embed/album/1xsGQbqvVDIq3sCJDUzQZv?utm_source=generator&si=4fcd6028385f48e8",
+        artist: "The Neighborhood",
+
+        embed: "https://open.spotify.com/embed/track/3UFePyU0mSJvGONoLWKTeW?utm_source=generator&si=c0af7a8d1f20402c",
 
         note:
-        "I remember I had played this song and you really liked it. Not just the song, but I hope we can continue showing each other our interests."
+            "I remember I had played this song and you really liked it. Not just the song, but I hope we can continue showing each other our interests."
     }
 
 ];
@@ -63,14 +75,14 @@ const songs = [
 
 loginButton.addEventListener("click", checkPassword);
 
-passwordInput.addEventListener("keydown", function(event) {
+passwordInput.addEventListener("keydown", function (event) {
 
-    if(event.key === "Enter"){
+    if (event.key === "Enter") {
 
         checkPassword();
 
     }
-    
+
 });
 
 function checkPassword() {
@@ -98,7 +110,7 @@ function checkPassword() {
                 //Create songs from now
                 createSongs();
 
-            }, 500);            
+            }, 500);
 
         }, 900);
 
@@ -111,19 +123,19 @@ function checkPassword() {
     }
 }
 
-function typeLetter(){
+function typeLetter() {
 
     let index = 0;
 
     const speed = 5;
 
 
-    function type(){
+    function type() {
 
-        if(index < letterText.length){
+        if (index < letterText.length) {
 
             document.getElementById("letter-text")
-            .innerHTML += letterText.charAt(index);
+                .innerHTML += letterText.charAt(index);
 
             index++;
 
@@ -131,8 +143,10 @@ function typeLetter(){
 
         } else {
 
+            document.getElementById("letter-tag").style.display = "block";
+
             const button =
-            document.getElementById("continue-button");
+                document.getElementById("continue-button");
 
 
             button.style.opacity = "1";
@@ -149,28 +163,28 @@ function typeLetter(){
 }
 
 document
-.getElementById("continue-button")
-.addEventListener("click", function(){
+    .getElementById("continue-button")
+    .addEventListener("click", function () {
 
-    letterPage.classList.add("hidden");
-
-    setTimeout(() => {
-
-        letterPage.style.display = "none";
-
-        puzzlePage.style.display = "flex";
+        letterPage.classList.add("hidden");
 
         setTimeout(() => {
 
-            puzzlePage.classList.add("visible");
+            letterPage.style.display = "none";
 
-            createPuzzle();
+            puzzlePage.style.display = "flex";
 
-        }, 60); 
+            setTimeout(() => {
 
-    }, 900);
+                puzzlePage.classList.add("visible");
 
-});
+                createPuzzle();
+
+            }, 60);
+
+        }, 900);
+
+    });
 
 const puzzleContainer = document.getElementById("puzzle-container");
 
@@ -180,13 +194,13 @@ puzzleContainer.innerHTML = "";
 
 let selectedPiece = null;
 
-function createPuzzle(){
+function createPuzzle() {
 
     puzzleContainer.innerHTML = "";
 
     let pieces = [];
 
-    for(let i = 0; i < 9; i++){
+    for (let i = 0; i < 9; i++) {
 
         pieces.push(i);
 
@@ -196,14 +210,16 @@ function createPuzzle(){
     shufflePieces(pieces);
 
 
-    pieces.forEach((pieceNumber)=>{
+    pieces.forEach((pieceNumber) => {
 
         const piece = document.createElement("div");
 
         piece.classList.add("piece");
 
-
         piece.dataset.correct = pieceNumber;
+
+
+        puzzleContainer.appendChild(piece);
 
 
         setPieceImage(piece, pieceNumber);
@@ -214,28 +230,39 @@ function createPuzzle(){
             selectPiece
         );
 
-
-        puzzleContainer.appendChild(piece);
-
     });
 
 }
 
-function setPieceImage(piece, number){
+function setPieceImage(piece, number) {
 
     const row = Math.floor(number / 3);
 
     const col = number % 3;
 
 
+    const size = piece.offsetWidth;
+
+
+    console.log(
+        "Piece:",
+        number,
+        "Row:",
+        row,
+        "Col:",
+        col,
+        "Size:",
+        size
+    );
+
     piece.style.backgroundPosition =
-    `-${col * 150}px -${row * 150}px`;
+        `-${col * size}px -${row * size}px`;
 
 }
 
-function shufflePieces(array){
+function shufflePieces(array) {
 
-    for(let i = array.length - 1; i > 0; i--){
+    for (let i = array.length - 1; i > 0; i--) {
 
         const j = Math.floor(Math.random() * (i + 1));
 
@@ -245,10 +272,10 @@ function shufflePieces(array){
 
 }
 
-function selectPiece(){
+function selectPiece() {
 
     // Clicking the selected piece again
-    if(this === selectedPiece){
+    if (this === selectedPiece) {
 
         this.classList.remove("selected");
 
@@ -260,7 +287,7 @@ function selectPiece(){
 
 
     // First piece selected
-    if(selectedPiece === null){
+    if (selectedPiece === null) {
 
         selectedPiece = this;
 
@@ -290,7 +317,7 @@ function selectPiece(){
 
 }
 
-function swapPieces(first, second){
+function swapPieces(first, second) {
 
     const firstPlaceholder = document.createElement("div");
     const secondPlaceholder = document.createElement("div");
@@ -322,21 +349,21 @@ function swapPieces(first, second){
 }
 
 const button = document.getElementById("puzzle-button");
-        button.style.opacity = "0";
+button.style.opacity = "0";
 
-function checkSolved(){
+function checkSolved() {
 
     const currentPieces =
-    document.querySelectorAll(".piece");
+        document.querySelectorAll(".piece");
 
 
     let solved = true;
 
 
-    currentPieces.forEach((piece,index)=>{
+    currentPieces.forEach((piece, index) => {
 
 
-        if(Number(piece.dataset.correct) !== index){
+        if (Number(piece.dataset.correct) !== index) {
 
             solved = false;
 
@@ -346,10 +373,10 @@ function checkSolved(){
     });
 
 
-    if(solved){
+    if (solved) {
 
         puzzleMessage.textContent = "You found us ❤️";
-        
+
         puzzleMessage.style.display = "block";
 
 
@@ -357,51 +384,51 @@ function checkSolved(){
 
             puzzleMessage.classList.add("visible");
 
-            
+
             button.style.opacity = "1";
 
             button.style.pointerEvents = "auto";
 
         }, 60);
-    
+
     }
 
 }
 
 document
-.getElementById("puzzle-button")
-.addEventListener("click", function(){
+    .getElementById("puzzle-button")
+    .addEventListener("click", function () {
 
-    puzzlePage.classList.add("hidden");
-
-    setTimeout(() => {
-
-        puzzlePage.style.display = "none";
-
-        musicPage.style.display = "flex";
+        puzzlePage.classList.add("hidden");
 
         setTimeout(() => {
 
-            musicPage.classList.add("visible");
+            puzzlePage.style.display = "none";
 
-        }, 60); 
-        
+            musicPage.style.display = "flex";
 
-    }, 900);
+            setTimeout(() => {
 
-});
+                musicPage.classList.add("visible");
 
-function createSongs(){
+            }, 60);
+
+
+        }, 900);
+
+    });
+
+function createSongs() {
 
     const songContainer =
-    document.getElementById("songs");
+        document.getElementById("songs");
 
 
     songs.forEach(song => {
 
 
         const songCard =
-        document.createElement("div");
+            document.createElement("div");
 
 
         songCard.classList.add("song");
@@ -409,9 +436,13 @@ function createSongs(){
 
         songCard.innerHTML = `
 
-            <h2 id="song-title">
+            <h2 class="song-title">
                 ${song.title}
             </h2>
+
+            <p class="artist">
+                ${song.artist}
+            </p>
 
 
             <iframe
@@ -432,6 +463,13 @@ function createSongs(){
 
 
         songContainer.appendChild(songCard);
+
+
+        setTimeout(() => {
+
+            songCard.classList.add("show");
+
+        }, 200);
 
 
     });
