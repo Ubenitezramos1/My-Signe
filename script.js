@@ -43,7 +43,7 @@ const songs = [
             "https://open.spotify.com/embed/album/1lP8AhonyWZZKNgnEcjSV0?utm_source=generator&si=0dc0c25a6be84159",
 
         note:
-            "This one just screams you. If this song was a person. It would be you"
+            "Probably isn't the song you'd expect to find here, but every time I hear it, I picture you. I imagine us out together, dancing, laughing, and completely forgetting about everything else."
     },
 
 
@@ -56,7 +56,7 @@ const songs = [
             "https://open.spotify.com/embed/track/6kdCN6gTWLcLxmLXoUcwuI?utm_source=generator&si=cbcbd82b04eb4e1c",
 
         note:
-            "This song we both really liked in Oaxaca. It was the day we got our infinity bracelets. It means so much to me."
+            "This song brings me back to Oaxaca and the day we got our infinity bracelets. Seeing it on the Jewelry and how we both liked it immediately. It's a small memory, but somehow it holds so much."
     },
 
 
@@ -68,7 +68,7 @@ const songs = [
         embed: "https://open.spotify.com/embed/track/3UFePyU0mSJvGONoLWKTeW?utm_source=generator&si=c0af7a8d1f20402c",
 
         note:
-            "I remember I had played this song and you really liked it. Not just the song, but I hope we can continue showing each other our interests."
+            "I remember playing this song and how you really liked it. Now it's on your playlists and you're queuing it on the speakers at Isla Verde. I hope we never stop sharing little pieces of ourselves like that."
     }
 
 ];
@@ -103,7 +103,7 @@ const memories = [
         image: "images/photo4.webp",
 
         caption:
-            "A very special day"
+            "A very special day."
     },
 
     {
@@ -130,7 +130,6 @@ we still have ahead.
 Until then, keep this as a little reminder
 that I am always thinking of you.
 
-I love you ♥️
 `;
 
 loginButton.addEventListener("click", checkPassword);
@@ -187,7 +186,7 @@ function typeLetter() {
 
     let index = 0;
 
-    const speed = 8;
+    const speed = 9;
 
 
     function type() {
