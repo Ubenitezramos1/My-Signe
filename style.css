@@ -342,7 +342,7 @@ button:hover {
         calc(var(--piece-size) * 3)
         calc(var(--piece-size) * 3);
 
-    background-image: url("images/party.jpg");
+    background-image: url("images/party.webp");
 
     cursor: pointer;
 

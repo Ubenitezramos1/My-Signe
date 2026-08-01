@@ -642,7 +642,7 @@ function typeFinalMessage() {
 
     let index = 0;
 
-    const speed = 45;
+    const speed = 8;
 
 
     function type() {
