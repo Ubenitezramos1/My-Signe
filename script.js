@@ -17,20 +17,19 @@ const reunionDate = new Date(
 );
 
 const letterText = `
-\tI've been thinking about what I wanted to say, and I realized my favorite part of us isn't one specific memory. It's watching who we're becoming together.
+I've been thinking about what I wanted to say, and I realized my favorite part of us isn't one specific memory. It's watching who we're becoming together.
 
-\nFrom the day we met, there was something about you that felt different. Our late-night talks at the park and the pier, getting to know each other little by little, are some of my favorite memories. Somewhere along the way, I stopped just liking you and started feeling at home with you.
+From our late-night talks at the park and the pier to all the little moments in between, somewhere along the way, you became someone who feels like home.
 
-\nOne of the things I admire most about you is how deeply you think and how willing you are to grow. I don't want some perfect version of you. I just want you. Every part of you, including the parts you're still figuring out. I hope you know I'll always try to understand you before I judge you.
+One of the things I admire most about you is how deeply you think and how willing you are to grow. I don't want a perfect version of you. I just want you. Every part of you, including the parts you're still figuring out. I'll always try to understand you before I judge you.
 
-\nYou've made me want to be a better man. You've challenged me to communicate better, trust more, and choose understanding over assumptions. We've both had experiences that shaped us into who we are today, and honestly, I'm grateful for every one of them because they eventually led us to each other.
+You've made me want to be a better man. You've challenged me to communicate better, trust more, and choose understanding over assumptions.
 
-\nI don't know exactly what our future looks like, but I do know that I want to keep learning about you, growing with you, and choosing you every day. Thank you for making me feel grounded, for trusting me, and for showing me a kind of love that feels peaceful.
+I don't know exactly what our future looks like, but I do know I want to keep learning about you, growing with you, and choosing you every day.
 
-\nNo matter how many miles are between us, I'm really grateful that I get to call you mine.
+Thank you for trusting me, for letting me be a part of your life, and for showing me a love that feels genuine and meaningful. No matter how many miles are between us, I'm grateful that I get to call you mine.
 
-\n\tI love you.
-
+I love you.
 `;
 
 const songs = [
@@ -77,7 +76,7 @@ const songs = [
 const memories = [
 
     {
-        image: "images/photo1.jpg",
+        image: "images/photo1.webp",
 
         caption:
             "One of my favorite days with you ♥️"
@@ -85,7 +84,7 @@ const memories = [
 
 
     {
-        image: "images/photo2.jpg",
+        image: "images/photo2.webp",
 
         caption:
             "I still smile whenever I see this."
@@ -93,7 +92,7 @@ const memories = [
 
 
     {
-        image: "images/photo3.jpg",
+        image: "images/photo3.webp",
 
         caption:
             "A memory I never want to forget."
@@ -101,14 +100,14 @@ const memories = [
 
 
     {
-        image: "images/photo4.jpg",
+        image: "images/photo4.webp",
 
         caption:
             "A very special day"
     },
 
     {
-        image: "images/photo5.jpg",
+        image: "images/photo5.webp",
 
         caption:
             "One of many adventures together."
@@ -188,7 +187,7 @@ function typeLetter() {
 
     let index = 0;
 
-    const speed = 5;
+    const speed = 8;
 
 
     function type() {
