@@ -16,26 +16,22 @@ const reunionDate = new Date(
     "2026-08-21T12:00:00"
 );
 
-const letterText = /*`
-I've been trying to figure out how to put everything I feel into words, and I realized something. My favorite part of us isn't one specific memory. It's who we're becoming together.
+const letterText = `
+\tI've been thinking about what I wanted to say, and I realized my favorite part of us isn't one specific memory. It's watching who we're becoming together.
 
-When I think back to when we first met, I remember how drawn I was to you. There was something different about you that I couldn't explain. Then came our late-night conversations, sitting at the park and the pier, learning about each other little by little. Somewhere along the way, admiration turned into something much deeper. I didn't just fall for you—I started feeling at home with you.
+\nFrom the day we met, there was something about you that felt different. Our late-night talks at the park and the pier, getting to know each other little by little, are some of my favorite memories. Somewhere along the way, I stopped just liking you and started feeling at home with you.
 
-One of my favorite things about you is that you let me see who you really are. Your curiosity, your kindness, your sense of adventure, your willingness to be vulnerable, and even the parts of yourself that you're still learning to understand. I don't want a perfect version of you. I just want you. Every chapter of you.
+\nOne of the things I admire most about you is how deeply you think and how willing you are to grow. I don't want some perfect version of you. I just want you. Every part of you, including the parts you're still figuring out. I hope you know I'll always try to understand you before I judge you.
 
-You've taught me a lot without even realizing it. You've challenged me to communicate better, to trust more, and to choose understanding over assumptions. Because of you, I've learned that love isn't about never struggling—it's about continuing to choose each other while we grow through those struggles.
+\nYou've made me want to be a better man. You've challenged me to communicate better, trust more, and choose understanding over assumptions. We've both had experiences that shaped us into who we are today, and honestly, I'm grateful for every one of them because they eventually led us to each other.
 
-I know we both have histories that shaped us into who we are today. I don't see that as something to hide from. If anything, I'm grateful for every path that eventually led us to each other. I genuinely believe I'm a better man because of the lessons I've learned, and I'm grateful I get to bring that version of myself into this relationship with you.
+\nI don't know exactly what our future looks like, but I do know that I want to keep learning about you, growing with you, and choosing you every day. Thank you for making me feel grounded, for trusting me, and for showing me a kind of love that feels peaceful.
 
-I don't know what every chapter of our future will look like, but I do know this: I want to keep learning you. I want to keep understanding you. I want to keep cheering for your growth while continuing to grow myself. I want us to always feel like we can talk about anything, laugh about the little things, work through the hard things, and never stop choosing one another.
+\nNo matter how many miles are between us, I'm really grateful that I get to call you mine.
 
-Thank you for making me feel grounded. Thank you for trusting me with your heart. Thank you for showing me that love can feel peaceful instead of confusing.
+\n\tI love you.
 
-No matter how many miles are between us right now, I've never been more certain that you're exactly where I want my heart to be.
-
-I love you.
-
-`*/ 'hello';
+`;
 
 const songs = [
 
@@ -135,7 +131,7 @@ we still have ahead.
 Until then, keep this as a little reminder
 that I am always thinking of you.
 
-I love you ❤️
+I love you ♥️
 `;
 
 loginButton.addEventListener("click", checkPassword);

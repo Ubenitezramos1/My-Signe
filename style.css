@@ -197,7 +197,7 @@ button:hover {
 
     width: 90%;
 
-    max-width: 600px;
+    max-width: 800px;
 
     padding: 35px;
 
@@ -215,13 +215,13 @@ button:hover {
 
     font-family: Georgia, serif;
 
-    font-size: 1.1rem;
+    font-size: 1rem;
 
     line-height: 2;
 
     color: #6E6876;
 
-    text-align: left;
+    text-align: center;
 
     margin-top: 10px;
 
@@ -232,7 +232,13 @@ button:hover {
 }
 
 #letter-tag{
+    font-family: Georgia, serif;
+
     font-size: 1.1rem;
+
+    line-height: 2;
+
+    color: #6E6876;
 }
 
 #puzzle-page {
@@ -413,7 +419,7 @@ button:hover {
 
     width:90%;
 
-    max-width:700px;
+    max-width:800px;
 
     padding:50px;
 
@@ -606,8 +612,6 @@ button:hover {
 
     align-items:center;
 
-    padding:20px;
-
     transition:
         opacity .9s ease;
 
@@ -630,7 +634,7 @@ button:hover {
 
     width:90%;
 
-    max-width:650px;
+    max-width:700px;
 
     padding:60px 50px;
 
@@ -750,6 +754,10 @@ button:hover {
 
 @media (max-width: 600px){
 
+    .letter-card {
+        padding: 20px;
+    }
+
     .puzzle-card{
 
         padding: 25px;
@@ -776,11 +784,14 @@ button:hover {
 
     }
 
-
     #photo-gallery{
 
         grid-template-columns:1fr;
 
+    }
+
+    .final-card{
+        padding:20px 20px;
     }
 
 }
