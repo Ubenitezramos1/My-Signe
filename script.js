@@ -10,7 +10,7 @@ const musicPage = document.getElementById("music-page");
 const memoryPage = document.getElementById("memory-page");
 const finalPage = document.getElementById("final-page");
 
-const correctPassword = "Fig";
+const correctPassword = atob("Rmln")
 
 const reunionDate = new Date(
     "2026-08-21T12:00:00"
