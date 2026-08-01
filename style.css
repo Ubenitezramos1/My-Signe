@@ -496,6 +496,238 @@ button:hover {
 
 }
 
+#memory-page {
+
+    display:none;
+
+    opacity:0;
+
+    width:100%;
+
+    min-height:100vh;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    transition:
+        opacity .9s ease;
+
+}
+
+
+#memory-page.visible {
+
+    display:flex;
+
+    opacity:1;
+
+}
+
+
+
+.memory-card {
+
+    background:white;
+
+    width:90%;
+
+    max-width:800px;
+
+    padding:50px;
+
+    border-radius:25px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.08);
+
+    text-align:center;
+
+}
+
+#photo-gallery {
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:25px;
+
+    margin:40px 0;
+
+}
+
+.photo-card {
+
+    background:#FCFAFD;
+
+    padding:15px;
+
+    border-radius:15px;
+
+}
+
+
+.photo-card img {
+
+    width:100%;
+
+    border-radius:12px;
+
+    display:block;
+
+}
+
+
+.photo-card p {
+
+    margin-top:15px;
+
+    font-family:Georgia,serif;
+
+    font-size:.95rem;
+
+}
+
+#final-page {
+
+    display:none;
+
+    opacity:0;
+
+    width:100%;
+
+    min-height:100vh;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    transition:
+        opacity .9s ease;
+
+}
+
+
+#final-page.visible {
+
+    display:flex;
+
+    opacity:1;
+
+}
+
+
+
+.final-card {
+
+    background:white;
+
+    width:90%;
+
+    max-width:650px;
+
+    padding:60px 50px;
+
+    border-radius:25px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.08);
+
+    text-align:center;
+
+}
+
+
+
+.final-card h1 {
+
+    margin-bottom:30px;
+
+}
+
+
+
+#final-message {
+
+    font-family:Georgia, serif;
+
+    color:#6E6876;
+
+    font-size:1.15rem;
+
+    line-height:2;
+
+    min-height:180px;
+
+}
+
+.countdown-section{
+
+    margin:0px 0 30px;
+
+    text-align:center;
+
+}
+
+#countdown{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-top:30px;
+
+}
+
+.time-box{
+
+    width:110px;
+
+    padding:20px;
+
+    background:#FCFAFD;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.06);
+
+}
+
+.time-box span{
+
+    display:block;
+
+    font-size:2.2rem;
+
+    font-family:"Quicksand", sans-serif;
+
+    color:#C8B6E2;
+
+    font-weight:700;
+
+}
+
+.time-box small{
+
+    color:#7A7482;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+}
+
 @keyframes fadeIn {
 
     from {
@@ -536,6 +768,19 @@ button:hover {
 
     #music-page{
         padding: 0px;
+    }
+
+    .memory-card{
+
+        padding:30px 20px;
+
+    }
+
+
+    #photo-gallery{
+
+        grid-template-columns:1fr;
+
     }
 
 }

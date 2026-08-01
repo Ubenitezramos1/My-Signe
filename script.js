@@ -7,8 +7,14 @@ const letterPage = document.getElementById("letter-page");
 const puzzlePage = document.getElementById("puzzle-page");
 const puzzleMessage = document.getElementById("puzzle-message");
 const musicPage = document.getElementById("music-page");
+const memoryPage = document.getElementById("memory-page");
+const finalPage = document.getElementById("final-page");
 
 const correctPassword = "Fig";
+
+const reunionDate = new Date(
+    "2026-08-21T12:00:00"
+);
 
 const letterText = /*`
 I've been trying to figure out how to put everything I feel into words, and I realized something. My favorite part of us isn't one specific memory. It's who we're becoming together.
@@ -36,7 +42,7 @@ const songs = [
     {
         title: "Car Crash",
 
-        artist:"Jigitz, Charlotte Plank",
+        artist: "Jigitz, Charlotte Plank",
 
         embed:
             "https://open.spotify.com/embed/album/1lP8AhonyWZZKNgnEcjSV0?utm_source=generator&si=0dc0c25a6be84159",
@@ -49,7 +55,7 @@ const songs = [
     {
         title: "Eres",
 
-        artist:"Café Tacvba",
+        artist: "Café Tacvba",
 
         embed:
             "https://open.spotify.com/embed/track/6kdCN6gTWLcLxmLXoUcwuI?utm_source=generator&si=cbcbd82b04eb4e1c",
@@ -62,7 +68,7 @@ const songs = [
     {
         title: "Planet",
 
-        artist:"The Neighborhood",
+        artist: "The Neighborhood",
 
         embed: "https://open.spotify.com/embed/track/3UFePyU0mSJvGONoLWKTeW?utm_source=generator&si=c0af7a8d1f20402c",
 
@@ -72,6 +78,65 @@ const songs = [
 
 ];
 
+const memories = [
+
+    {
+        image: "images/photo1.jpg",
+
+        caption:
+            "One of my favorite days with you ♥️"
+    },
+
+
+    {
+        image: "images/photo2.jpg",
+
+        caption:
+            "I still smile whenever I see this."
+    },
+
+
+    {
+        image: "images/photo3.jpg",
+
+        caption:
+            "A memory I never want to forget."
+    },
+
+
+    {
+        image: "images/photo4.jpg",
+
+        caption:
+            "A very special day"
+    },
+
+    {
+        image: "images/photo5.jpg",
+
+        caption:
+            "One of many adventures together."
+    }
+
+];
+
+const finalText = `
+Signe,
+
+I hope this little corner of the internet
+reminded you how much you mean to me.
+
+Even though there are miles between us,
+you are still a part of my everyday life.
+
+I cannot wait for all the adventures
+we still have ahead.
+
+Until then, keep this as a little reminder
+that I am always thinking of you.
+
+I love you ❤️
+`;
 
 loginButton.addEventListener("click", checkPassword);
 
@@ -375,7 +440,7 @@ function checkSolved() {
 
     if (solved) {
 
-        puzzleMessage.textContent = "You found us ❤️";
+        puzzleMessage.textContent = "You found us ♥️";
 
         puzzleMessage.style.display = "block";
 
@@ -464,10 +529,212 @@ function createSongs() {
 
         songContainer.appendChild(songCard);
 
-        
+
 
 
     });
 
 }
 
+document
+    .getElementById("music-continue")
+    .addEventListener("click", function () {
+
+
+        musicPage.classList.add("hidden");
+
+
+        setTimeout(() => {
+
+
+            musicPage.style.display = "none";
+
+
+            memoryPage.style.display = "flex";
+
+
+            setTimeout(() => {
+
+
+                memoryPage.classList.add("visible");
+
+
+                createGallery();
+
+
+            }, 60);
+
+
+        }, 900);
+
+
+    });
+
+function createGallery() {
+
+    const gallery =
+        document.getElementById("photo-gallery");
+
+
+    memories.forEach(memory => {
+
+
+        const photoCard =
+            document.createElement("div");
+
+
+        photoCard.classList.add("photo-card");
+
+
+        photoCard.innerHTML = `
+
+            <img src="${memory.image}">
+
+
+            <p>
+                ${memory.caption}
+            </p>
+
+        `;
+
+
+        gallery.appendChild(photoCard);
+
+
+    });
+
+}
+
+document
+    .getElementById("photo-continue")
+    .addEventListener("click", function () {
+
+
+        memoryPage.classList.add("hidden");
+
+
+        setTimeout(() => {
+
+
+            memoryPage.style.display = "none";
+
+
+            finalPage.style.display = "flex";
+
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "auto"
+            });
+
+
+            setTimeout(() => {
+
+
+                finalPage.classList.add("visible");
+
+                typeFinalMessage();
+
+            }, 60);
+
+
+        }, 900);
+
+
+    });
+
+function typeFinalMessage() {
+
+    let index = 0;
+
+    const speed = 45;
+
+
+    function type() {
+
+        if (index < finalText.length) {
+
+            document
+                .getElementById("final-message")
+                .innerHTML += finalText.charAt(index);
+
+
+            index++;
+
+            setTimeout(type, speed);
+
+        }
+
+    }
+
+
+    type();
+
+}
+
+function updateCountdown() {
+
+    const now = new Date();
+
+    const difference =
+        reunionDate - now;
+
+    if (difference <= 0) {
+
+        document.getElementById(
+            "countdown"
+        ).innerHTML =
+            "<h2>We're together again ♥️</h2>";
+
+        return;
+
+    }
+
+    const days =
+        Math.floor(
+            difference /
+            (1000 * 60 * 60 * 24)
+        );
+
+    const hours =
+        Math.floor(
+            difference %
+            (1000 * 60 * 60 * 24) /
+            (1000 * 60 * 60)
+        );
+
+    const minutes =
+        Math.floor(
+            difference %
+            (1000 * 60 * 60) /
+            (1000 * 60)
+        );
+
+    const seconds =
+        Math.floor(
+            difference %
+            (1000 * 60) /
+            1000
+        );
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+
+}
+
+updateCountdown();
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+document
+    .getElementById("restart-button")
+    .addEventListener("click", () => {
+
+        location.reload();
+
+    });
