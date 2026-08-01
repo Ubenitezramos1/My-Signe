@@ -3,6 +3,9 @@ const loginButton = document.getElementById("login-button");
 const message = document.getElementById("message");
 const loginContainer = document.getElementById("login-container");
 const websiteContent = document.getElementById("website-content");
+const letterPage = document.getElementById("letter-page");
+const puzzlePage = document.getElementById("puzzle-page");
+const puzzleMessage = document.getElementById("puzzle-message");
 
 const correctPassword = "Fig";
 
@@ -72,7 +75,7 @@ function typeLetter(){
 
     let index = 0;
 
-    const speed = 40;
+    const speed = 5;
 
 
     function type(){
@@ -102,6 +105,231 @@ function typeLetter(){
 
 
     type();
+
+}
+
+document
+.getElementById("continue-button")
+.addEventListener("click", function(){
+
+    letterPage.classList.add("hidden");
+
+    setTimeout(() => {
+
+        letterPage.style.display = "none";
+
+        puzzlePage.style.display = "block";
+
+        setTimeout(() => {
+
+            puzzlePage.classList.add("visible");
+
+            createPuzzle();
+
+        }, 60); 
+        
+         
+            setTimeout(() => {
+                puzzlePage.classList.add("visible");
+            }, 60);
+
+    }, 900);
+
+});
+
+const puzzleContainer = document.getElementById("puzzle-container");
+
+console.log(puzzleContainer);
+
+puzzleContainer.innerHTML = "";
+
+let selectedPiece = null;
+
+function createPuzzle(){
+
+    puzzleContainer.innerHTML = "";
+
+    let pieces = [];
+
+    for(let i = 0; i < 9; i++){
+
+        pieces.push(i);
+
+    }
+
+
+    shufflePieces(pieces);
+
+
+    pieces.forEach((pieceNumber)=>{
+
+        const piece = document.createElement("div");
+
+        piece.classList.add("piece");
+
+
+        piece.dataset.correct = pieceNumber;
+
+
+        setPieceImage(piece, pieceNumber);
+
+
+        piece.addEventListener(
+            "click",
+            selectPiece
+        );
+
+
+        puzzleContainer.appendChild(piece);
+
+    });
+
+}
+
+function setPieceImage(piece, number){
+
+    const row = Math.floor(number / 3);
+
+    const col = number % 3;
+
+
+    piece.style.backgroundPosition =
+    `-${col * 150}px -${row * 150}px`;
+
+}
+
+function shufflePieces(array){
+
+    for(let i = array.length - 1; i > 0; i--){
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [array[i], array[j]] = [array[j], array[i]];
+
+    }
+
+}
+
+function selectPiece(){
+
+    // Clicking the selected piece again
+    if(this === selectedPiece){
+
+        this.classList.remove("selected");
+
+        selectedPiece = null;
+
+        return;
+
+    }
+
+
+    // First piece selected
+    if(selectedPiece === null){
+
+        selectedPiece = this;
+
+        this.classList.add("selected");
+
+        return;
+
+    }
+
+
+    // Second piece selected
+    swapPieces(
+        selectedPiece,
+        this
+    );
+
+
+    selectedPiece.classList.remove(
+        "selected"
+    );
+
+
+    selectedPiece = null;
+
+
+    checkSolved();
+
+}
+
+function swapPieces(first, second){
+
+    const firstPlaceholder = document.createElement("div");
+    const secondPlaceholder = document.createElement("div");
+
+
+    puzzleContainer.replaceChild(
+        firstPlaceholder,
+        first
+    );
+
+
+    puzzleContainer.replaceChild(
+        secondPlaceholder,
+        second
+    );
+
+
+    puzzleContainer.replaceChild(
+        first,
+        secondPlaceholder
+    );
+
+
+    puzzleContainer.replaceChild(
+        second,
+        firstPlaceholder
+    );
+
+}
+
+const button = document.getElementById("puzzle-button");
+        button.style.opacity = "0";
+
+function checkSolved(){
+
+    const currentPieces =
+    document.querySelectorAll(".piece");
+
+
+    let solved = true;
+
+
+    currentPieces.forEach((piece,index)=>{
+
+
+        if(Number(piece.dataset.correct) !== index){
+
+            solved = false;
+
+        }
+
+
+    });
+
+
+    if(solved){
+
+        puzzleMessage.textContent = "You found us ❤️";
+        
+        puzzleMessage.style.display = "block";
+
+
+        setTimeout(() => {
+
+            puzzleMessage.classList.add("visible");
+
+            
+            button.style.opacity = "1";
+
+            button.style.pointerEvents = "auto";
+
+        }, 60);
+    
+    }
 
 }
 
