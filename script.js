@@ -3,17 +3,40 @@ const loginButton = document.getElementById("login-button");
 const message = document.getElementById("message");
 const loginContainer = document.getElementById("login-container");
 const websiteContent = document.getElementById("website-content");
-const letterPage = document.getElementById("letter-page");
-const puzzlePage = document.getElementById("puzzle-page");
 const puzzleMessage = document.getElementById("puzzle-message");
-const musicPage = document.getElementById("music-page");
-const memoryPage = document.getElementById("memory-page");
-const finalPage = document.getElementById("final-page");
+
+const initializedPages = new Set();
+
+// Photos are stored together in one opaque archive to avoid listing each
+// image separately in the public repository. This is concealment, not security.
+const photoAssets = loadPhotoAssets();
+
+async function loadPhotoAssets() {
+    const response = await fetch("memories.assets");
+    if (!response.ok) throw new Error("Could not load the photo archive.");
+
+    const buffer = await response.arrayBuffer();
+    const view = new DataView(buffer);
+    const manifestLength = view.getUint32(0, false);
+    const manifestStart = 4;
+    const payloadStart = manifestStart + manifestLength;
+    const manifest = JSON.parse(
+        new TextDecoder().decode(new Uint8Array(buffer, manifestStart, manifestLength))
+    );
+    const assets = {};
+
+    manifest.forEach(asset => {
+        const bytes = buffer.slice(payloadStart + asset.offset, payloadStart + asset.offset + asset.length);
+        assets[asset.id] = URL.createObjectURL(new Blob([bytes], { type: asset.type }));
+    });
+
+    return assets;
+}
 
 const correctPassword = atob("Rmln")
 
 const reunionDate = new Date(
-    "2026-08-21T12:00:00"
+    "2026-11-18T12:00:00"
 );
 
 const letterText = `
@@ -31,6 +54,16 @@ Thank you for trusting me, for letting me be a part of your life, and for showin
 
 I love you.
 `;
+
+const letters = [
+    {
+        date: "August 1, 2026",
+        title: "National GF Day",
+        greeting: "To my favorite person,",
+        body: letterText,
+        signature: "Always,\nUriel"
+    }
+];
 
 const songs = [
 
@@ -76,7 +109,7 @@ const songs = [
 const memories = [
 
     {
-        image: "images/photo1.webp",
+        image: "photo1",
 
         caption:
             "One of my favorite days with you ♥️"
@@ -84,7 +117,7 @@ const memories = [
 
 
     {
-        image: "images/photo2.webp",
+        image: "photo2",
 
         caption:
             "I still smile whenever I see this."
@@ -92,7 +125,7 @@ const memories = [
 
 
     {
-        image: "images/photo3.webp",
+        image: "photo3",
 
         caption:
             "A memory I never want to forget."
@@ -100,19 +133,54 @@ const memories = [
 
 
     {
-        image: "images/photo4.webp",
+        image: "photo4",
 
         caption:
             "A very special day."
     },
 
     {
-        image: "images/photo5.webp",
+        image: "photo5",
 
         caption:
             "One of many adventures together."
     }
 
+];
+
+const puzzlePhotoIds = [
+    "puzzle-party",
+    ...memories.map((_, index) => `puzzle-memory-${index + 1}`)
+];
+
+let puzzlePhotoIndex = Math.floor(Math.random() * puzzlePhotoIds.length) - 1;
+
+const adventures = [
+    {
+        date: "May 28, 2026 🇲🇽",
+        title: "Our Mexico adventure",
+        images: [
+            "mexico-1",
+            "mexico-2",
+            "mexico-3",
+            "mexico-4",
+            "mexico-5",
+            "mexico-6",
+            "mexico-7"
+        ]
+    },
+    {
+        date: "August 21, 2026 🇬🇹",
+        title: "Our Guatemala adventure",
+        images: [
+            "guatemala-1",
+            "guatemala-2",
+            "guatemala-3",
+            "guatemala-4",
+            "guatemala-5",
+            "guatemala-6"
+        ]
+    }
 ];
 
 const finalText = `
@@ -162,15 +230,6 @@ function checkPassword() {
                 websiteContent.classList.add("visible");
             }, 60);
 
-            setTimeout(() => {
-
-                typeLetter();
-
-                //Create songs from now
-                createSongs();
-
-            }, 500);
-
         }, 900);
 
     } else {
@@ -182,80 +241,142 @@ function checkPassword() {
     }
 }
 
-function typeLetter() {
+function navigateTo(pageId) {
+    const page = document.getElementById(pageId);
+    if (!page) return;
 
-    let index = 0;
+    document.querySelectorAll("#website-content .app-page").forEach(section => {
+        section.classList.remove("active", "visible", "hidden");
+    });
 
-    const speed = 9;
+    page.classList.add("active", "visible");
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 
-
-    function type() {
-
-        if (index < letterText.length) {
-
-            document.getElementById("letter-text")
-                .innerHTML += letterText.charAt(index);
-
-            index++;
-
-            setTimeout(type, speed);
-
-        } else {
-
-            document.getElementById("letter-tag").style.display = "block";
-
-            const button =
-                document.getElementById("continue-button");
-
-
-            button.style.opacity = "1";
-
-            button.style.pointerEvents = "auto";
-
-        }
-
+    if (pageId === "puzzle-page") {
+        initializedPages.add(pageId);
+        createPuzzle();
+        return;
     }
 
+    if (initializedPages.has(pageId)) return;
+    initializedPages.add(pageId);
 
-    type();
+    if (pageId === "letter-page") createLetterCards();
+    if (pageId === "music-page") createSongs();
+    if (pageId === "memory-page") createGallery();
+    if (pageId === "adventures-page") {
+        createAdventureList();
+    }
+    if (pageId === "final-page") {
+        typeFinalMessage();
+    }
+}
 
+document.getElementById("home-button").addEventListener("click", () => {
+    navigateTo("home-page");
+});
+
+document.querySelectorAll(".home-tile[data-page]").forEach(tile => {
+    tile.addEventListener("click", () => navigateTo(tile.dataset.page));
+});
+
+function createLetterCards() {
+    const letterList = document.getElementById("letter-list");
+    const continueButton = document.getElementById("continue-button");
+
+    letters.forEach((letter, index) => {
+        const card = document.createElement("article");
+        card.classList.add("archive-entry-card");
+
+        const toggle = document.createElement("button");
+        toggle.type = "button";
+        toggle.classList.add("archive-entry-toggle");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-controls", `letter-content-${index}`);
+
+        const heading = document.createElement("span");
+        heading.classList.add("archive-entry-heading");
+
+        const date = document.createElement("span");
+        date.classList.add("archive-entry-date");
+        date.textContent = letter.date;
+
+        const title = document.createElement("span");
+        title.classList.add("archive-entry-title");
+        title.textContent = letter.title;
+
+        const chevron = document.createElement("span");
+        chevron.classList.add("archive-entry-chevron");
+        chevron.setAttribute("aria-hidden", "true");
+        chevron.textContent = "⌄";
+
+        heading.append(date, title);
+        toggle.append(heading, chevron);
+
+        const content = document.createElement("div");
+        content.classList.add("archive-entry-content", "letter-entry-content");
+        content.id = `letter-content-${index}`;
+        content.hidden = true;
+
+        if (letter.greeting) {
+            const greeting = document.createElement("p");
+            greeting.classList.add("letter-greeting");
+            greeting.textContent = letter.greeting;
+            content.appendChild(greeting);
+        }
+
+        letter.body.trim().split(/\n\s*\n/).forEach(paragraphText => {
+            const paragraph = document.createElement("p");
+            paragraph.textContent = paragraphText.trim();
+            content.appendChild(paragraph);
+        });
+
+        if (letter.signature) {
+            const signature = document.createElement("p");
+            signature.classList.add("letter-signature");
+            signature.textContent = letter.signature;
+            content.appendChild(signature);
+        }
+
+        toggle.addEventListener("click", () => {
+            const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+            toggle.setAttribute("aria-expanded", String(!isExpanded));
+            content.hidden = isExpanded;
+            card.classList.toggle("expanded", !isExpanded);
+        });
+
+        card.append(toggle, content);
+        letterList.appendChild(card);
+    });
+
+    continueButton.style.opacity = "1";
+    continueButton.style.pointerEvents = "auto";
 }
 
 document
     .getElementById("continue-button")
-    .addEventListener("click", function () {
-
-        letterPage.classList.add("hidden");
-
-        setTimeout(() => {
-
-            letterPage.style.display = "none";
-
-            puzzlePage.style.display = "flex";
-
-            setTimeout(() => {
-
-                puzzlePage.classList.add("visible");
-
-                createPuzzle();
-
-            }, 60);
-
-        }, 900);
-
-    });
+    .addEventListener("click", () => navigateTo("puzzle-page"));
 
 const puzzleContainer = document.getElementById("puzzle-container");
-
-console.log(puzzleContainer);
 
 puzzleContainer.innerHTML = "";
 
 let selectedPiece = null;
 
-function createPuzzle() {
+async function createPuzzle() {
+
+    const assets = await photoAssets;
+
+    puzzlePhotoIndex = (puzzlePhotoIndex + 1) % puzzlePhotoIds.length;
+    const puzzleImage = assets[puzzlePhotoIds[puzzlePhotoIndex]];
 
     puzzleContainer.innerHTML = "";
+    selectedPiece = null;
+    puzzleMessage.classList.remove("visible");
+    puzzleMessage.style.display = "none";
+    puzzleMessage.textContent = "";
+    button.style.opacity = "0";
+    button.style.pointerEvents = "none";
 
     let pieces = [];
 
@@ -281,7 +402,7 @@ function createPuzzle() {
         puzzleContainer.appendChild(piece);
 
 
-        setPieceImage(piece, pieceNumber);
+        setPieceImage(piece, pieceNumber, puzzleImage);
 
 
         piece.addEventListener(
@@ -293,29 +414,21 @@ function createPuzzle() {
 
 }
 
-function setPieceImage(piece, number) {
+function setPieceImage(piece, number, imageUrl) {
 
     const row = Math.floor(number / 3);
 
     const col = number % 3;
 
 
-    const size = piece.offsetWidth;
+    const width = piece.offsetWidth;
+    const height = piece.offsetHeight;
 
+    piece.style.backgroundImage = `url("${imageUrl}")`;
 
-    console.log(
-        "Piece:",
-        number,
-        "Row:",
-        row,
-        "Col:",
-        col,
-        "Size:",
-        size
-    );
 
     piece.style.backgroundPosition =
-        `-${col * size}px -${row * size}px`;
+        `-${col * width}px -${row * height}px`;
 
 }
 
@@ -456,26 +569,7 @@ function checkSolved() {
 
 document
     .getElementById("puzzle-button")
-    .addEventListener("click", function () {
-
-        puzzlePage.classList.add("hidden");
-
-        setTimeout(() => {
-
-            puzzlePage.style.display = "none";
-
-            musicPage.style.display = "flex";
-
-            setTimeout(() => {
-
-                musicPage.classList.add("visible");
-
-            }, 60);
-
-
-        }, 900);
-
-    });
+    .addEventListener("click", () => navigateTo("music-page"));
 
 function createSongs() {
 
@@ -532,39 +626,11 @@ function createSongs() {
 
 document
     .getElementById("music-continue")
-    .addEventListener("click", function () {
+    .addEventListener("click", () => navigateTo("memory-page"));
 
+async function createGallery() {
 
-        musicPage.classList.add("hidden");
-
-
-        setTimeout(() => {
-
-
-            musicPage.style.display = "none";
-
-
-            memoryPage.style.display = "flex";
-
-
-            setTimeout(() => {
-
-
-                memoryPage.classList.add("visible");
-
-
-                createGallery();
-
-
-            }, 60);
-
-
-        }, 900);
-
-
-    });
-
-function createGallery() {
+    const assets = await photoAssets;
 
     const gallery =
         document.getElementById("photo-gallery");
@@ -582,7 +648,7 @@ function createGallery() {
 
         photoCard.innerHTML = `
 
-            <img src="${memory.image}">
+            <img src="${assets[memory.image]}" alt="${memory.caption}">
 
 
             <p>
@@ -599,43 +665,80 @@ function createGallery() {
 
 }
 
-document
-    .getElementById("photo-continue")
-    .addEventListener("click", function () {
+async function createAdventureList() {
+    const assets = await photoAssets;
+    const adventureList = document.getElementById("adventure-list");
 
+    adventures.forEach((adventure, index) => {
+        const card = document.createElement("article");
+        card.classList.add("archive-entry-card");
 
-        memoryPage.classList.add("hidden");
+        const toggle = document.createElement("button");
+        toggle.type = "button";
+        toggle.classList.add("archive-entry-toggle");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-controls", `adventure-photos-${index}`);
 
+        const heading = document.createElement("span");
+        heading.classList.add("archive-entry-heading");
 
-        setTimeout(() => {
+        const date = document.createElement("p");
+        date.classList.add("archive-entry-date");
+        date.textContent = adventure.date;
 
+        const title = document.createElement("span");
+        title.classList.add("archive-entry-title");
+        title.textContent = adventure.title;
 
-            memoryPage.style.display = "none";
+        const chevron = document.createElement("span");
+        chevron.classList.add("archive-entry-chevron");
+        chevron.setAttribute("aria-hidden", "true");
+        chevron.textContent = "⌄";
 
+        heading.append(date, title);
+        toggle.append(heading, chevron);
+        card.appendChild(toggle);
 
-            finalPage.style.display = "flex";
+        const content = document.createElement("div");
+        content.classList.add("archive-entry-content");
+        content.id = `adventure-photos-${index}`;
+        content.hidden = true;
 
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: "auto"
+        toggle.addEventListener("click", () => {
+            const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+            toggle.setAttribute("aria-expanded", String(!isExpanded));
+            content.hidden = isExpanded;
+            card.classList.toggle("expanded", !isExpanded);
+        });
+
+        if (adventure.images?.length) {
+            const gallery = document.createElement("div");
+            gallery.classList.add("adventure-gallery");
+
+            adventure.images.forEach((imageId, index) => {
+                const figure = document.createElement("figure");
+                figure.classList.add("adventure-photo");
+
+                const image = document.createElement("img");
+                image.src = assets[imageId];
+                image.alt = `${adventure.title}, photo ${index + 1}`;
+                image.loading = "lazy";
+
+                figure.appendChild(image);
+                gallery.appendChild(figure);
             });
 
+            content.appendChild(gallery);
+        }
 
-            setTimeout(() => {
-
-
-                finalPage.classList.add("visible");
-
-                typeFinalMessage();
-
-            }, 60);
-
-
-        }, 900);
-
-
+        card.appendChild(content);
+        adventureList.appendChild(card);
     });
+}
+
+document
+    .getElementById("photo-continue")
+    .addEventListener("click", () => navigateTo("final-page"));
 
 function typeFinalMessage() {
 

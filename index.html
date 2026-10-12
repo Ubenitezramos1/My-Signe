@@ -50,39 +50,96 @@
 
     <div id="website-content">
 
-        <div id="letter-page">
+        <header class="site-header">
+            <button id="home-button" class="home-button" type="button" aria-label="Return to home">⌂ Home</button>
+            <span class="site-header-title">Our Little Story ♥️</span>
+        </header>
+
+        <main id="home-page" class="app-page active">
+            <section id="home-reunion" aria-labelledby="reunion-heading">
+                <div class="home-reunion-card">
+                    <div class="heart">♥️</div>
+                    <h1 id="reunion-heading">Until We Are Together Again</h1>
+                    <p class="reunion-date">Next reunion: November 15, 2026 🇨🇴</p>
+                    <div class="countdown-section">
+                        <div id="countdown">
+                            <div class="time-box">
+                                <span id="days">0</span>
+                                <small>Days</small>
+                            </div>
+                            <div class="time-box">
+                                <span id="hours">0</span>
+                                <small>Hours</small>
+                            </div>
+                            <div class="time-box">
+                                <span id="minutes">0</span>
+                                <small>Minutes</small>
+                            </div>
+                            <div class="time-box">
+                                <span id="seconds">0</span>
+                                <small>Seconds</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="home-card">
+                <div class="heart">♥️</div>
+                <h1>Our Little Story</h1>
+                <p>Memories, songs, and little pieces of us. Choose a page to revisit.</p>
+
+                <nav class="home-grid" aria-label="Explore our memories">
+                    <button class="home-tile" type="button" data-page="letter-page">
+                        <span class="tile-icon">💌</span>
+                        <span class="tile-title">Letters &amp; Little Reminders</span>
+                        <span class="tile-description">Notes, letters, and things to remember</span>
+                    </button>
+                    <button class="home-tile" type="button" data-page="puzzle-page">
+                        <span class="tile-icon">🧩</span>
+                        <span class="tile-title">Uncover a Memory</span>
+                        <span class="tile-description">Put the pieces together</span>
+                    </button>
+                    <button class="home-tile" type="button" data-page="music-page">
+                        <span class="tile-icon">🎵</span>
+                        <span class="tile-title">Songs That Remind Me of You</span>
+                        <span class="tile-description">The stories behind our songs</span>
+                    </button>
+                    <button class="home-tile" type="button" data-page="memory-page">
+                        <span class="tile-icon">📷</span>
+                        <span class="tile-title">Memory Lane</span>
+                        <span class="tile-description">Favorite photos of us</span>
+                    </button>
+                    <button class="home-tile" type="button" data-page="final-page">
+                        <span class="tile-icon">💌</span>
+                        <span class="tile-title">A Note for You</span>
+                        <span class="tile-description">A little message from me</span>
+                    </button>
+                    <button class="home-tile" type="button" data-page="adventures-page">
+                        <span class="tile-icon">✈️</span>
+                        <span class="tile-title">Our Adventures</span>
+                        <span class="tile-description">Memories from the places we've shared</span>
+                    </button>
+                </nav>
+            </section>
+        </main>
+
+        <div id="letter-page" class="app-page">
 
             <div class="letter-card">
 
-                <h1>
-                    Happy National GF Day ♥️
-                </h1>
+                <h1>Letters &amp; Little Reminders ♥️</h1>
+                <p class="letters-intro">Little notes, letters, and the moments I want you to remember.</p>
+                <div id="letter-list" aria-label="Letters and reminders"></div>
 
-                <p>
-                    To my favorite person,
-                </p>
-
-                <p id="letter-text">
-
-                </p>
-
-                <p id="letter-tag" style="display: none;">
-                    Always,
-                    Uriel
-                </p>
-
-                <button id="continue-button">
-
-                    Continue →
-
-                </button>
+                <button id="continue-button">Continue →</button>
 
 
             </div>
 
         </div>
 
-        <div id="puzzle-page">
+        <div id="puzzle-page" class="app-page">
 
             <div class="puzzle-card">
 
@@ -92,7 +149,7 @@
 
 
                 <p>
-                    Put the pieces together.
+                    Put the pieces together. A new photo appears each time.
                 </p>
 
 
@@ -110,7 +167,7 @@
 
         </div>
 
-        <div id="music-page">
+        <div id="music-page" class="app-page">
 
             <div class="music-card">
 
@@ -131,7 +188,7 @@
 
         </div>
 
-        <div id="memory-page">
+        <div id="memory-page" class="app-page">
 
             <div class="memory-card">
 
@@ -166,51 +223,30 @@
 
         </div>
 
-        <div id="final-page">
+        <div id="adventures-page" class="app-page">
 
-            <div class="final-card">
+            <div class="final-card adventures-card">
 
                 <div class="heart">
                     ♥️
                 </div>
 
                 <h1>
-                    Until We Are Together Again
+                    Adventures We've Shared
                 </h1>
 
-                <p class="reunion-date">
-                    Next adventure:
-                    August 21, 2026 🇬🇹
-                </p>
-
-                <div class="countdown-section">
-
-                    <div id="countdown">
-
-                        <div class="time-box">
-                            <span id="days">0</span>
-                            <small>Days</small>
-                        </div>
-
-                        <div class="time-box">
-                            <span id="hours">0</span>
-                            <small>Hours</small>
-                        </div>
-
-                        <div class="time-box">
-                            <span id="minutes">0</span>
-                            <small>Minutes</small>
-                        </div>
-
-                        <div class="time-box">
-                            <span id="seconds">0</span>
-                            <small>Seconds</small>
-                        </div>
-
+                <section class="adventures-section" aria-labelledby="adventures-heading">
+                    <h2 id="adventures-heading">Our memories together ♥️</h2>
+                    <div id="adventure-list">
                     </div>
+                </section>
+            </div>
+        </div>
 
-                </div>
-
+        <div id="final-page" class="app-page">
+            <div class="final-card">
+                <div class="heart">♥️</div>
+                <h1>A Note for You</h1>
 
                 <p id="final-message">
 

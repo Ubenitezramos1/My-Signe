@@ -211,33 +211,15 @@ button:hover {
 }
 
 
-#letter-text {
-
-    font-family: Georgia, serif;
-
-    font-size: 1rem;
-
-    line-height: 2;
-
-    color: #6E6876;
-
-    text-align: center;
-
-    margin-top: 10px;
-
-    min-height: 200px;
-
-    margin-bottom: 10px;
-
+#letter-list {
+    display: grid;
+    gap: 14px;
+    margin: 24px 0;
+    text-align: left;
 }
 
-#letter-tag{
-    font-family: Georgia, serif;
-
-    font-size: 1.1rem;
-
-    line-height: 2;
-
+.letters-intro {
+    margin-top: 10px;
     color: #6E6876;
 }
 
@@ -309,10 +291,10 @@ button:hover {
     display: grid;
 
     grid-template-columns:
-        repeat(3, var(--piece-size));
+        repeat(3, var(--piece-width));
 
     grid-template-rows:
-        repeat(3, var(--piece-size));
+        repeat(3, var(--piece-height));
 
     gap: 5px;
 
@@ -328,21 +310,20 @@ button:hover {
 
 :root {
 
-    --piece-size: min(28vw, 150px);
+    --piece-width: min(28vw, 150px);
+    --piece-height: calc(var(--piece-width) * 4 / 3);
 
 }
 
 .piece {
 
-    width: var(--piece-size);
+    width: var(--piece-width);
 
-    height: var(--piece-size);
+    height: var(--piece-height);
 
     background-size:
-        calc(var(--piece-size) * 3)
-        calc(var(--piece-size) * 3);
-
-    background-image: url("images/party.webp");
+        calc(var(--piece-width) * 3)
+        calc(var(--piece-height) * 3);
 
     cursor: pointer;
 
@@ -679,6 +660,148 @@ button:hover {
 
 }
 
+.adventures-section {
+    margin: 0 0 30px;
+}
+
+.adventures-section h2 {
+    margin-bottom: 16px;
+    color: #5f5a63;
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.archive-entry-card {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0;
+    background: #FCFAFD;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.06);
+    overflow: hidden;
+}
+
+.archive-entry-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    padding: 20px 24px;
+    color: inherit;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+}
+
+.archive-entry-toggle:hover,
+.archive-entry-toggle:focus-visible {
+    background: #F8F3F9;
+}
+
+.archive-entry-toggle:focus-visible {
+    outline: 2px solid #A985AD;
+    outline-offset: -3px;
+}
+
+.archive-entry-heading {
+    display: grid;
+    gap: 5px;
+}
+
+.archive-entry-heading p {
+    margin: 0;
+}
+
+.archive-entry-title {
+    color: #5f5a63;
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.12rem;
+    font-weight: 600;
+}
+
+.archive-entry-date {
+    color: #A79EAE;
+    font-size: .9rem;
+}
+
+.archive-entry-chevron {
+    color: #8B718F;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: transform .2s ease;
+}
+
+.archive-entry-card.expanded .archive-entry-chevron {
+    transform: rotate(180deg);
+}
+
+.archive-entry-content[hidden] {
+    display: none;
+}
+
+.archive-entry-content {
+    padding: 0 24px 24px;
+}
+
+.letter-entry-content {
+    color: #6E6876;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.85;
+}
+
+.letter-entry-content p + p {
+    margin-top: 14px;
+}
+
+.letter-signature {
+    margin-top: 18px;
+    white-space: pre-line;
+}
+
+.adventure-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    align-items: start;
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.adventure-photo {
+    overflow: hidden;
+    padding: 8px;
+    background: #F5F0F6;
+    border-radius: 14px;
+}
+
+.adventure-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 440px;
+    object-fit: contain;
+    border-radius: 9px;
+}
+
+@media (max-width: 600px) {
+    .archive-entry-toggle {
+        padding: 18px;
+    }
+
+    .archive-entry-content {
+        padding: 0 18px 18px;
+    }
+
+    .adventure-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
 #countdown{
 
     display:flex;
@@ -839,4 +962,172 @@ button:hover {
         padding:20px 20px;
     }
 
+}
+
+/* Home screen and shared navigation */
+#website-content {
+    width: 100%;
+}
+
+#home-reunion {
+    width: min(100% - 32px, 900px);
+    margin: 22px auto 8px;
+}
+
+.home-reunion-card {
+    padding: 26px 30px 22px;
+    border: 1px solid rgba(200, 182, 226, .45);
+    border-radius: 24px;
+    background: linear-gradient(135deg, #fff, #FCFAFD);
+    box-shadow: 0 12px 32px rgba(0,0,0,.07);
+    text-align: center;
+}
+
+.home-reunion-card .heart {
+    margin-bottom: 4px;
+    font-size: 28px;
+}
+
+.home-reunion-card h1 {
+    margin-bottom: 8px;
+}
+
+.home-reunion-card .reunion-date {
+    margin-bottom: 6px;
+}
+
+.home-reunion-card .countdown-section {
+    margin: 0;
+}
+
+.home-reunion-card #countdown {
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.home-reunion-card .time-box {
+    width: 90px;
+    padding: 12px 10px;
+}
+
+.home-reunion-card .time-box span {
+    font-size: 1.7rem;
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(100% - 32px, 1000px);
+    margin: 0 auto;
+    padding: 14px 0;
+}
+
+.site-header-title {
+    color: #7A7482;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 600;
+}
+
+button.home-button {
+    width: auto;
+    margin: 0;
+    padding: 10px 16px;
+    border-radius: 999px;
+}
+
+#website-content .app-page {
+    display: none;
+    opacity: 0;
+}
+
+#website-content .app-page.active {
+    display: flex;
+    opacity: 1;
+}
+
+#home-page {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 16px 48px;
+}
+
+#adventures-page {
+    width: 100%;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.home-card {
+    width: min(100%, 900px);
+    padding: clamp(28px, 6vw, 56px);
+    border-radius: 25px;
+    background: #fff;
+    box-shadow: 0 15px 40px rgba(0,0,0,.08);
+    text-align: center;
+}
+
+.home-card > p {
+    max-width: 540px;
+    margin: 0 auto 32px;
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+button.home-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 150px;
+    margin: 0;
+    padding: 22px;
+    border: 1px solid #F0EAF4;
+    background: #FCFAFD;
+    color: #5f5a63;
+    text-align: left;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+button.home-tile:hover {
+    transform: translateY(-3px);
+    background: #F8F2FA;
+    box-shadow: 0 10px 24px rgba(0,0,0,.08);
+}
+
+.tile-icon {
+    margin-bottom: 12px;
+    font-size: 1.5rem;
+}
+
+.tile-title {
+    margin-bottom: 5px;
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.tile-description {
+    color: #7A7482;
+    font-size: .9rem;
+    font-weight: 400;
+}
+
+@media (max-width: 600px) {
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
+
+    button.home-tile {
+        min-height: 125px;
+    }
 }
